@@ -13,6 +13,6 @@ def clientela(request):
     return render(request, "login.html", {"clientes" : lista_clientes} )
 
 def inicio(self):
-    plantilla = loader.get_template('index.html')
+    plantilla = loader.get_template('inicio.html')
     documento = plantilla.render()
     return HttpResponse(documento)
