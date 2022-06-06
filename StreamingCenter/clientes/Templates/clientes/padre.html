@@ -17,65 +17,73 @@
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'clientes/css/styles.css' %}" rel="stylesheet" />
+        <style type="text/css"> 
+            a { text-decoration: none; 
+                color: white;} 
+            </style>
+        <script src=" {% static 'clientes/js/scripts.js' %}"></script>
     </head>
+    {% block top %}
     <body id="page-top">
         <!-- Navigation-->
         <a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
         <nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand"><a href="#page-top">Start Bootstrap</a></li>
-                <li class="sidebar-nav-item"><a href="#page-top">Home</a></li>
-                <li class="sidebar-nav-item"><a href="#about">About</a></li>
-                <li class="sidebar-nav-item"><a href="#services">Services</a></li>
-                <li class="sidebar-nav-item"><a href="#portfolio">Portfolio</a></li>
-                <li class="sidebar-nav-item"><a href="#contact">Contact</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'inicio' %}">inicio</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'netflix' %}">netflix</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'amazon' %}">amazon</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'spotify' %}">spotify</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'disney' %}">disney</a></li>
             </ul>
         </nav>
         <!-- Header-->
         <header class="masthead d-flex align-items-center">
             <div class="container px-4 px-lg-5 text-center">
-                <h1 class="mb-1">Stylish Portfolio</h1>
-                <h3 class="mb-5"><em>A Free Bootstrap Theme by Start Bootstrap</em></h3>
-                <a class="btn btn-primary btn-xl" href="#about">Find Out More</a>
+                <h1 class="mb-1">StreamingCenter</h1>
+                {% block cambiarTitulo %} 
+                {% endblock %}
+                {% block eliminarHeader %}
+                <h3 class="mb-5"><em>Organiza tus clientes de manera UNICA</em></h3>
+                <a class="btn btn-primary btn-xl" href="#about">cosas para hacer</a>
+                {% endblock %}
             </div>
         </header>
-        <!-- About-->
+            {% block eliminarDemas %}
         <section class="content-section bg-light" id="about">
             <div class="container px-4 px-lg-5 text-center">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-10">
-                        <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
+                        <h2>Podras <b>AGREGAR</b> <b>ELIMINAR</b> <b>ADMINISTRAR</b> clientes</h2>
                         <p class="lead mb-5">
-                            This theme features a flexible, UX friendly sidebar menu and stock photos from our friends at
-                            <a href="https://unsplash.com/">Unsplash</a>
-                            !
+                            servicios como <b>AMAZON</b> <b>NETFLIX</b> <b>DISNEY</b>
                         </p>
-                        <a class="btn btn-dark btn-xl" href="#services">What We Offer</a>
+                        <a class="btn btn-dark btn-xl" href="#services">ver</a>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Services-->
+            {% endblock %}
+        {% endblock %}
         <section class="content-section bg-primary text-white text-center" id="services">
             <div class="container px-4 px-lg-5">
                 <div class="content-section-heading">
-                    <h3 class="text-secondary mb-0">Services</h3>
-                    <h2 class="mb-5">What We Offer</h2>
+                    <h3 class="text-secondary mb-0">agrega tus clientes segun el servicio que desees</h3>
+                    <h2 class="mb-5">SERVICIOS</h2>
                 </div>
                 <div class="row gx-4 gx-lg-5">
                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                         <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-screen-smartphone"></i></span>
-                        <h4><strong>Responsive</strong></h4>
+                        <h4><strong><b><a href="/cuentas/netflix"> NETFLIX</a></b></strong></h4>
                         <p class="text-faded mb-0">Looks great on any screen size!</p>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                         <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-pencil"></i></span>
-                        <h4><strong>Redesigned</strong></h4>
+                        <h4><strong><a href="/cuentas/amazon"> AMAZON</a></strong></h4>
                         <p class="text-faded mb-0">Freshly redesigned for Bootstrap 5.</p>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
                         <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-like"></i></span>
-                        <h4><strong>Favorited</strong></h4>
+                        <h4><strong><b><a href="/cuentas/disney"> DISNEY</a></b></strong></h4>
                         <p class="text-faded mb-0">
                             Millions of users
                             <i class="fas fa-heart"></i>
@@ -84,13 +92,15 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-mustache"></i></span>
-                        <h4><strong>Question</strong></h4>
+                        <h4><strong><b><a href="/cuentas/spotify"> SPOTIFY</a></b></strong></h4>
                         <p class="text-faded mb-0">I mustache you a question...</p>
                     </div>
                 </div>
             </div>
         </section>
+        
         <!-- Callout-->
+        {% block down %}
         <section class="callout">
             <div class="container px-4 px-lg-5 text-center">
                 <h2 class="mx-auto mb-5">
@@ -156,6 +166,7 @@
                 </div>
             </div>
         </section>
+        {% endblock %}
         <!-- Call to Action-->
         <section class="content-section bg-primary text-white">
             <div class="container px-4 px-lg-5 text-center">
@@ -164,12 +175,6 @@
                 <a class="btn btn-xl btn-dark" href="#!">Look at Me!</a>
             </div>
         </section>
-        <!-- Map-->
-        <div class="map" id="contact">
-            <iframe src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
-            <br />
-            <small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a></small>
-        </div>
         <!-- Footer-->
         <footer class="footer text-center">
             <div class="container px-4 px-lg-5">
@@ -186,6 +191,8 @@
                 </ul>
                 <p class="text-muted small mb-0">Copyright &copy; Your Website 2022</p>
             </div>
+        {% block contenidoQueCambia %}
+        {% endblock %}
         </footer>
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>

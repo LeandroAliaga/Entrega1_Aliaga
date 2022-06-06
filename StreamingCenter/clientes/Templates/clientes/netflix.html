@@ -1,0 +1,28 @@
+{% extends "clientes/padre.html"  %}
+{% load static %}
+{% block cambiarTitulo %}
+<h1>NETFLIX</h1>
+<from action = "{% url 'netflix' %}" method = "POST">{% csrf_token %}
+    <table>
+        {{netflixFormulario}}
+    </table>
+    <input type="submit" value="Enviar formulario">
+
+</from>
+{% endblock %}
+
+{% block eliminarHeader %}
+{% endblock %}
+
+{% block eliminarDemas %}
+{% endblock %}
+
+
+
+<form action="{% url '/cuentas/netflix' %}" method="POST">{% csrf_token %}
+    <table>
+        {{netflixformulario.as_table}}
+    </table>
+    <input type="submit" value="Enviar formulario">
+
+</form>

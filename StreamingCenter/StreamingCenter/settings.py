@@ -55,7 +55,7 @@ ROOT_URLCONF = 'StreamingCenter.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['C:/Users/Lea/Desktop/PROYECTO_FINAL/StreamingCenter/clientes/Templates'],
+        'DIRS': ['C:/Users/Lea/Desktop/PROYECTO_FINAL/StreamingCenter/clientes/Templates/clientes'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,7 +116,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'clientes/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
