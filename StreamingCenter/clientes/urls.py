@@ -1,12 +1,11 @@
-from django.contrib import admin
+
 from django.urls import path, include
 from clientes import views
 
 urlpatterns = [
-    path("netflix/", views.netflix, name ="netflix"),
-    path("amazon/", views.amazon, name ="amazon"),
-    path("spotify/", views.spotify, name ="spotify"),
-    path("disney/", views.disney, name ="disney"),
-    path("inicio/", views.inicio, name ="inicio"),
-    path("cuentas/", views.cuentas, name ="cuentas"),
+    path("clientes/", views.clientes_formulario, name ="agregarCliente"),
+    path("empleados/", views.empleados_formulario, name ="agregarEmpleado"),
+    path("servicios/", views.servicios_formulario, name ="agregarServicio"),
+    path("mostrar/", views.mostrarDatos, name ="mostrarDatos"),
+    
 ]

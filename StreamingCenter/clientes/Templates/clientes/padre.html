@@ -6,9 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Stylish Portfolio - Start Bootstrap Template</title>
+        <title>StreamingCenter</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        {% block estilos %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{% static 'clientes/assets/favicon.ico' %}" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Simple line icons-->
@@ -20,35 +22,35 @@
         <style type="text/css"> 
             a { text-decoration: none; 
                 color: white;} 
-            </style>
+        </style>
         <script src=" {% static 'clientes/js/scripts.js' %}"></script>
+        
+
+
     </head>
-    {% block top %}
     <body id="page-top">
         <!-- Navigation-->
         <a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
         <nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-item"><a href="{% url 'inicio' %}">inicio</a></li>
-                <li class="sidebar-nav-item"><a href="{% url 'netflix' %}">netflix</a></li>
-                <li class="sidebar-nav-item"><a href="{% url 'amazon' %}">amazon</a></li>
-                <li class="sidebar-nav-item"><a href="{% url 'spotify' %}">spotify</a></li>
-                <li class="sidebar-nav-item"><a href="{% url 'disney' %}">disney</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'agregarCliente' %}">agregar clientes</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'agregarEmpleado' %}">agregar empleados</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'agregarServicio' %}">agregar servicios</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'mostrarDatos' %} ">preguntas y respuestas</a></li>
             </ul>
         </nav>
         <!-- Header-->
         <header class="masthead d-flex align-items-center">
             <div class="container px-4 px-lg-5 text-center">
+                {% block formulario %}
                 <h1 class="mb-1">StreamingCenter</h1>
-                {% block cambiarTitulo %} 
-                {% endblock %}
-                {% block eliminarHeader %}
-                <h3 class="mb-5"><em>Organiza tus clientes de manera UNICA</em></h3>
+                <h3 class="mb-5"><em>Organiza tu tienda de manera UNICA</em></h3>
                 <a class="btn btn-primary btn-xl" href="#about">cosas para hacer</a>
                 {% endblock %}
             </div>
         </header>
-            {% block eliminarDemas %}
+        {% block headerdos %}
         <section class="content-section bg-light" id="about">
             <div class="container px-4 px-lg-5 text-center">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -62,47 +64,46 @@
                 </div>
             </div>
         </section>
-            {% endblock %}
         {% endblock %}
         <section class="content-section bg-primary text-white text-center" id="services">
             <div class="container px-4 px-lg-5">
                 <div class="content-section-heading">
-                    <h3 class="text-secondary mb-0">agrega tus clientes segun el servicio que desees</h3>
-                    <h2 class="mb-5">SERVICIOS</h2>
+                    <h3 class="text-secondary mb-0">¿Como quieres administrar hoy?</h3>
+                    <h2 class="mb-5">TAREAS</h2>
                 </div>
                 <div class="row gx-4 gx-lg-5">
                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                        <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-screen-smartphone"></i></span>
-                        <h4><strong><b><a href="/cuentas/netflix"> NETFLIX</a></b></strong></h4>
-                        <p class="text-faded mb-0">Looks great on any screen size!</p>
+                        <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-home"></i></span>
+                        <h4><strong><b><a href="{% url 'mostrarDatos' %}"> MOSTRAR DATOS</a></b></strong></h4>
+                        <p class="text-faded mb-0"></p>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                        <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-pencil"></i></span>
-                        <h4><strong><a href="/cuentas/amazon"> AMAZON</a></strong></h4>
-                        <p class="text-faded mb-0">Freshly redesigned for Bootstrap 5.</p>
+                        <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-people"></i></span>
+                        <h4><strong><a href="{% url 'agregarCliente' %}"> AGREGAR CLIENTES</a></strong></h4>
+                        <p class="text-faded mb-0">administra los clientes</p>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
-                        <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-like"></i></span>
-                        <h4><strong><b><a href="/cuentas/disney"> DISNEY</a></b></strong></h4>
+                        <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-pie-chart"></i></span>
+                        <h4><strong><b><a href="{% url 'agregarEmpleado' %}"> AGREGAR EMPLEADOS</a></b></strong></h4>
                         <p class="text-faded mb-0">
-                            Millions of users
-                            <i class="fas fa-heart"></i>
-                            Start Bootstrap!
+                            administra los empleados
                         </p>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-mustache"></i></span>
-                        <h4><strong><b><a href="/cuentas/spotify"> SPOTIFY</a></b></strong></h4>
-                        <p class="text-faded mb-0">I mustache you a question...</p>
+                    <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                        <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-plus"></i></span>
+                        <h4><strong><b><a href="{% url 'agregarServicio' %}"> AGREGAR SERVICIOS</a></b></strong></h4>
+                        <p class="text-faded mb-0">
+                            administra los servicios
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
-        
+        {% block callout %}
         <!-- Callout-->
-        {% block down %}
         <section class="callout">
             <div class="container px-4 px-lg-5 text-center">
+                
                 <h2 class="mx-auto mb-5">
                     Welcome to
                     <em>your</em>
@@ -111,63 +112,64 @@
                 <a class="btn btn-primary btn-xl" href="https://startbootstrap.com/theme/stylish-portfolio/">Download Now!</a>
             </div>
         </section>
+        {% endblock %}
         <!-- Portfolio-->
         <section class="content-section" id="portfolio">
             <div class="container px-4 px-lg-5">
                 <div class="content-section-heading text-center">
-                    <h3 class="text-secondary mb-0">Portfolio</h3>
-                    <h2 class="mb-5">Recent Projects</h2>
+                    <h3 class="text-secondary mb-0"></h3>
+                    <h2 class="mb-5">INFORMACION SOBRE</h2>
                 </div>
                 <div class="row gx-0">
                     <div class="col-lg-6">
                         <a class="portfolio-item" href="#!">
                             <div class="caption">
                                 <div class="caption-content">
-                                    <div class="h2">Stationary</div>
-                                    <p class="mb-0">A yellow pencil with envelopes on a clean, blue backdrop!</p>
+                                    <div class="h2">StreamingCenter</div>
+                                    <p class="mb-0">Tienda dedicada a vender servicios de streaming y contenido audiovisual</p>
                                 </div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio-1.jpg" alt="..." />
+                            <img class="img-fluid" src="{% static 'clientes/assets/img/portfolio-1.jpg' %}" alt="..." />
                         </a>
                     </div>
                     <div class="col-lg-6">
                         <a class="portfolio-item" href="#!">
                             <div class="caption">
                                 <div class="caption-content">
-                                    <div class="h2">Ice Cream</div>
-                                    <p class="mb-0">A dark blue background with a colored pencil, a clip, and a tiny ice cream cone!</p>
+                                    <div class="h2">NETFLIX</div>
+                                    <p class="mb-0">Netflix es un servicio de streaming por suscripción que les permite a sus miembros ver series y películas sin publicidades en un dispositivo con conexión a internet.    </p>
                                 </div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio-2.jpg" alt="..." />
+                            <img class="img-fluid" src="{% static 'clientes/assets/img/portfolio-2.jpg' %}" alt="..." />
                         </a>
                     </div>
                     <div class="col-lg-6">
                         <a class="portfolio-item" href="#!">
                             <div class="caption">
                                 <div class="caption-content">
-                                    <div class="h2">Strawberries</div>
-                                    <p class="mb-0">Strawberries are such a tasty snack, especially with a little sugar on top!</p>
+                                    <div class="h2">DISNEY</div>
+                                    <p class="mb-0">Disney Plus, en pocas palabras, es un servicio de streaming que puedes disfrutar en tu televisor inteligente, computadora, tableta y otros dispositivos compatibles con este tipo de transmisiones</p>
                                 </div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio-3.jpg" alt="..." />
+                            <img class="img-fluid" src="{% static 'clientes/assets/img/portfolio-3.jpg' %}" alt="" />
                         </a>
                     </div>
                     <div class="col-lg-6">
                         <a class="portfolio-item" href="#!">
                             <div class="caption">
                                 <div class="caption-content">
-                                    <div class="h2">Workspace</div>
-                                    <p class="mb-0">A yellow workspace with some scissors, pencils, and other objects.</p>
+                                    <div class="h2">AMAZON</div>
+                                    <p class="mb-0">programa de suscripción anual de la tienda online Amazon,Su principal beneficio es que estando registrado en él tendrás envío en 24 horas totalmente gratuito en más de dos millones de productos que tienen la etiqueta Prime</p>
                                 </div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio-4.jpg" alt="..." />
+                            <img class="img-fluid" src="{% static 'clientes/assets/img/portfolio-4.jpg' %}" alt="..." />
                         </a>
                     </div>
                 </div>
             </div>
         </section>
-        {% endblock %}
         <!-- Call to Action-->
+        {% block action %}
         <section class="content-section bg-primary text-white">
             <div class="container px-4 px-lg-5 text-center">
                 <h2 class="mb-4">The buttons below are impossible to resist...</h2>
@@ -175,6 +177,7 @@
                 <a class="btn btn-xl btn-dark" href="#!">Look at Me!</a>
             </div>
         </section>
+        {% endblock %}
         <!-- Footer-->
         <footer class="footer text-center">
             <div class="container px-4 px-lg-5">
@@ -189,10 +192,8 @@
                         <a class="social-link rounded-circle text-white" href="#!"><i class="icon-social-github"></i></a>
                     </li>
                 </ul>
-                <p class="text-muted small mb-0">Copyright &copy; Your Website 2022</p>
+                <p class="text-muted small mb-0">Copyright &copy; StreamingCenter 2022</p>
             </div>
-        {% block contenidoQueCambia %}
-        {% endblock %}
         </footer>
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
