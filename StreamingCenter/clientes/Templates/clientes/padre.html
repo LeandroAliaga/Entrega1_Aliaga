@@ -37,10 +37,13 @@
                 <li class="sidebar-nav-item"><a href="{% url 'agregarCliente' %}">agregar clientes</a></li>
                 <li class="sidebar-nav-item"><a href="{% url 'agregarEmpleado' %}">agregar empleados</a></li>
                 <li class="sidebar-nav-item"><a href="{% url 'agregarServicio' %}">agregar servicios</a></li>
-                <li class="sidebar-nav-item"><a href="{% url 'mostrarDatos' %} ">preguntas y respuestas</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'mostrarDatos' %} ">Datos de La Empresa</a></li>
             </ul>
         </nav>
         <!-- Header-->
+        {% block preheader%}
+        {% endblock %}
+        {% block header %}
         <header class="masthead d-flex align-items-center">
             <div class="container px-4 px-lg-5 text-center">
                 {% block formulario %}
@@ -50,6 +53,7 @@
                 {% endblock %}
             </div>
         </header>
+        {% endblock %}
         {% block headerdos %}
         <section class="content-section bg-light" id="about">
             <div class="container px-4 px-lg-5 text-center">
@@ -64,6 +68,8 @@
                 </div>
             </div>
         </section>
+        {% endblock %}
+        {% block headertres %}
         {% endblock %}
         <section class="content-section bg-primary text-white text-center" id="services">
             <div class="container px-4 px-lg-5">

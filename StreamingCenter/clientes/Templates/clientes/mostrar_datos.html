@@ -1,20 +1,229 @@
 {% extends "clientes/padre.html"  %}
 {% load static %}
 
-{% block headerdos %}
+<!-- ESTILOS CSS-->
+{% block estilos %}
+<style>
+    table {
+    margin-bottom: 2em;
+    width: 100%;
+    border-collapse: collapse;
+    background: #1D809F
+}
+th {
+  border-bottom: 2px solid #ccc;
+  font-weight: bold;
+  text-align: left;
+}
+td { border-bottom: 1px solid #ddd; color:rgb(255, 255, 255); }
+caption, th, td {
+  padding: 4px 10px 4px 0;
+}
+caption {
+  background: #f1f1f1;
+  padding: 10px 0;
+  margin-bottom: 1em;
+}
+
+tr,td,th {
+  vertical-align: middle;
+}
+table tr th {background:#222; color:#fff; padding:0; border:#111 solid 1px;  text-align: center; font-weight: bold;}  
+table tr td {border:1px rgb(0, 0, 0) solid; padding:5px;}  
+table tr td.rightright {background: #eee;}  
+table tr td h4 {margin:0; padding:0; font-weight:normal;}
+.col-lg-3 col-md-6 mb-5 mb-lg-0 {
+    display:flex;
+    float:right;
+}
+.boton_administrar{
+    color:black;
+}
+
+</style>
 {% endblock %}
 
-{% block formulario %}
-<div>
-    {{ servicios }}
-</div>
-<div>
-    {{ clientes }}
-</div>
-<div>
-    {{ empleados }}
-</div>
+<!-- INICIO MOSTRAR DATOS -->
+{% block preheader %}
+    
+    <header class="masthead d-flex align-items-center">
+        <div class="container px-4 px-lg-5 text-center">
+            <div class="container px-4 px-lg-5">
+                <div class="content-section-heading">
+                    
+                    <h2 class="mb-5">TABLAS DE CONTENTIDO</h2>
+                    <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
+                    <a class="btn btn-dark btn-xl" href="#clientes">CLIENTES</a>
+                    <a class="btn btn-dark btn-xl" href="#empleados">EMPLEADOS</a>
+                </div>
+            </div>
+            
+        </div>
+    </header>
+    
 {% endblock %}
+
+<!-- DATOS CLIENTES-->
+
+{% block headerdos %}
+<section class="" id="clientes">
+    <header class="masthead d-flex align-items-center">
+        <div class="container px-4 px-lg-5 text-center">
+            
+            <div>
+                <h3>CLIENTES </h3>
+                
+                    <table>
+                        <tr>
+                            <th><strong>nombre</strong></th>
+                            <th><strong>apellido</strong></th>
+                            <th><strong>servicio</strong></th>
+                            <th><strong>administrar</strong></th>
+                        </tr>
+                        {% for c in clientes %}
+                        <tr>
+                            <td>{{c.nombre}}</td>
+                            <td>{{c.apellido}}</td>
+                            <td>{{c.servicio}}</td>
+                            <td> 
+                                <button>
+                                    <a class = "boton_administrar"href="{% url 'eliminarCliente' c.id %}"> Eliminar</a>></a>
+                                </button>
+                                <button>
+                                    <a class = "boton_administrar"href="{% url 'agregarCliente' %}"> Agregar</a>></a>
+                                </button>
+                                <button>
+                                    <a class = "boton_administrar"href="{% url 'editarCliente' c.id %}"> Editar</a>></a>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="content-section-heading">
+                        <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
+                        <a class="btn btn-dark btn-xl" href="#clientes">CLIENTES</a>
+                        <a class="btn btn-dark btn-xl" href="#empleados">EMPLEADOS</a>
+                    </div>
+                
+            </div>
+            
+        </div>
+    </header>
+</section>
+{% endblock %}
+
+
+
+
+<!-- DATOS SERVICIOS-->
+
+{% block formulario %}
+<section class="" id="servicios">   
+    <div>
+        <h3>SERVICIOS </h3>
+        
+            <table>
+                
+                <tr>
+                    <th><strong>servicio</strong></th>
+                    <th><strong>descripcion</strong></th>
+                    <th><strong>precio</strong></th>
+                    <th><strong>administrar</strong></th>
+                </tr> 
+                {% for s in servicios %}      
+                <tr>
+                    <td>{{s.nombre}}</td>
+                    <td>{{s.descripcion}}</td>
+                    <td>{{s.precio}}</td>
+                    <td> 
+                        <button>
+                            <a class = "boton_administrar"href="{% url 'eliminarServicio' s.id %}"> Eliminar</a>></a>
+                        </button>
+                        <button>
+                            <a class = "boton_administrar"href="{% url 'agregarServicio' %}"> agregar</a>></a>
+                        </button>
+                        <button>
+                            <a class = "boton_administrar"href="{% url 'editarServicio' s.id %}"> editar</a>></a>
+                        </button>
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="content-section-heading">
+                <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
+                <a class="btn btn-dark btn-xl" href="#clientes">CLIENTES</a>
+                <a class="btn btn-dark btn-xl" href="#empleados">EMPLEADOS</a>
+            </div>
+
+        
+        
+    </div>
+</section>
+{% endblock %}
+
+
+
+
+
+
+
+
+<!-- DATOS EMPLEADOS -->
+
+{% block headertres %}
+<section class="" id="empleados">
+    <header class="masthead d-flex align-items-center">
+        <div class="container px-4 px-lg-5 text-center">
+            <div>
+                <h3>EMPLEADOS </h3>
+                    <table>
+                        <tr>
+                            <th><strong>nombre</strong></th>
+                            <th><strong>apellido</strong></th>
+                            <th><strong>area</strong></th>
+                            <th><strong>administrar</strong></th>
+                        </tr>
+                        {% for e in empleados %}
+                        <tr>
+                            <td>{{e.nombre}}</td>
+                            <td>{{e.apellido}}</td>
+                            <td>{{e.area}}</td>
+                            <td> 
+                                <button>
+                                    <a class = "boton_administrar"href="{% url 'eliminarEmpleado' e.id %}"> Eliminar</a>></a>
+                                </button>
+                                <button>
+                                    <a class = "boton_administrar"href="{% url 'agregarEmpleado' %}"> agregar</a>></a>
+                                </button>
+                                <button>
+                                    <a class = "boton_administrar"href="{% url 'editarEmpleado' e.id %}"> editar</a>></a>
+                                </button>
+                            </td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="content-section-heading">
+                        <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
+                        <a class="btn btn-dark btn-xl" href="#clientes">CLIENTES</a>
+                        <a class="btn btn-dark btn-xl" href="#empleados">EMPLEADOS</a>
+                    </div>
+                
+                    
+            </div> 
+        </div>
+
+    </header>
+</section>
+{% endblock %}
+
+
+
+
+
+
+<!-- NO SE VE -->
 
 {% block callout %}
 {% endblock %}

@@ -7,5 +7,5 @@ from clientes import views
 urlpatterns = [
     path('admin/', admin.site.urls), 
     path("streamingCenter/", include('clientes.urls')),
-    path("inicio/", views.inicio, name ="inicio"),
+    
 ]
