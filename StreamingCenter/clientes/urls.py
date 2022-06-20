@@ -1,9 +1,10 @@
 
 from django.urls import path, include
 from clientes import views
+from clientes.views import Inicio
 
 urlpatterns = [
-    path("", views.inicio, name ="inicio"),
+    
     path("clientes/", views.clientes_formulario, name ="agregarCliente"),
     path("empleados/", views.empleados_formulario, name ="agregarEmpleado"),
     path("servicios/", views.servicios_formulario, name ="agregarServicio"),
@@ -14,5 +15,7 @@ urlpatterns = [
     path("editar_servicio/<id>", views.editar_servicio, name ="editarServicio"),
     path("editar_empleado/<id>", views.editar_empleado, name ="editarEmpleado"),
     path("editar_cliente/<id>", views.editar_cliente, name ="editarCliente"),
+
+    
     
 ]

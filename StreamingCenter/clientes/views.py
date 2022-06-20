@@ -3,9 +3,20 @@ from django.shortcuts import render
 from django.template import loader
 from .forms import Cliente_formulario , Empleado_formulario, Servicio_formulario
 from .models import Cliente, Servicios, Empleados
+from django.views.generic import View, TemplateView
 
-def inicio(request):
-    return render(request, 'clientes/inicio.html')
+
+#---------------------------------------------------------------------------------------------------------------------
+#inicio
+
+class Inicio(TemplateView):
+    template_name = 'clientes/inicio.html'
+
+
+
+
+
+
 def mostrarDatos(request):
     clientes = Cliente.objects.all()
     empleados = Empleados.objects.all()
@@ -18,26 +29,11 @@ def mostrarDatos(request):
 
 
 
-def buscar(request):
-    if request.GET["nombre"]:
-        nombre = request.GET["nombre"]
-        cliente = Cliente.objects.filter(nombre__icontains=nombre)
-        
-        return render(request, 'clientes/mostrar_datos.html', {'clientes': cliente})
-    else:
-        respuesta = "No se encontraron resultados"
-        
-    return HttpResponse(respuesta)
 
 
 
-
-
-
-
-
-
-
+#---------------------------------------------------------------------------------------------------------------------
+#clientes
 
 
 def clientes_formulario(request):
@@ -56,7 +52,7 @@ def clientes_formulario(request):
     else:
         miFormulario = Cliente_formulario()
             
-    return render(request, 'clientes/clientes_template.html', {'formulario': miFormulario})
+    return render(request, 'clientes/clientes_template.html', {'formulario_clientes': miFormulario})
 
 def eliminar_cliente(request, id):
     cliente = Cliente.objects.get(id=id)
@@ -64,7 +60,7 @@ def eliminar_cliente(request, id):
     
     clientes = Cliente.objects.all()
     contexto = {'clientes': clientes}
-    return render(request, 'clientes/inicio.html')
+    return render(request, 'mostrar_datos.html', contexto)
 
 def editar_cliente(request, id):
     cliente = Cliente.objects.get(id=id)
@@ -89,14 +85,9 @@ def editar_cliente(request, id):
         formulario_cliente = Cliente_formulario(initial={'nombre': cliente.nombre, 'apellido': cliente.apellido, 'fechaVencimiento': cliente.fechaVencimiento, 'email': cliente.email, 'contraseña': cliente.contraseña, 'servicio': cliente.servicio})
     return render(request, 'clientes/clientes_template.html', {'formulario_clientes': formulario_cliente})
 
-
-
-
-
-
-
-
-
+def editar_empleado(request, id):
+    empleado = Empleados.objects.get(id=id)
+    
 
 
 
@@ -150,23 +141,8 @@ def editar_empleado(request, id):
     return render(request, 'clientes/empleados_template.html', {'formulario_empleados': formulario_empleado})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#---------------------------------------------------------------------------------------------------------------------
+#servicios
 
 def servicios_formulario(request):
     
