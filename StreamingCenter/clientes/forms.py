@@ -1,4 +1,13 @@
 from django import forms
+from datetime import date
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+
+
+
+
+
 
 class Cliente_formulario(forms.Form):
     nombre = forms.CharField(max_length=30)
@@ -41,4 +50,14 @@ class Servicio_formulario(forms.Form):
         return precio
 
         
+class UserRegistrationForm(UserCreationForm):
+    username = forms.CharField(max_length=30)
+    email = forms.EmailField(required=True)
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput)
+    
+    class meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+        help_text = {k:"" for k  in fields}
     

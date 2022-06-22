@@ -52,8 +52,8 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                 <div class="content-section-heading">
                     
                     <h2 class="mb-5">TABLAS DE CONTENTIDO</h2>
-                    <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
                     <a class="btn btn-dark btn-xl" href="#clientes">CLIENTES</a>
+                    <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
                     <a class="btn btn-dark btn-xl" href="#empleados">EMPLEADOS</a>
                 </div>
             </div>
@@ -61,11 +61,10 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
         </div>
     </header>
     
-{% endblock %}
+
 
 <!-- DATOS CLIENTES-->
 
-{% block headerdos %}
 <section class="" id="clientes">
     <header class="masthead d-flex align-items-center">
         <div class="container px-4 px-lg-5 text-center">
@@ -101,8 +100,8 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                         {% endfor %}
                     </table>
                     <div class="content-section-heading">
-                        <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
                         <a class="btn btn-dark btn-xl" href="#clientes">CLIENTES</a>
+                        <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
                         <a class="btn btn-dark btn-xl" href="#empleados">EMPLEADOS</a>
                     </div>
                 
@@ -111,58 +110,61 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
         </div>
     </header>
 </section>
-{% endblock %}
+
 
 
 
 
 <!-- DATOS SERVICIOS-->
 
-{% block formulario %}
-<section class="" id="servicios">   
-    <div>
-        <h3>SERVICIOS </h3>
-        
-            <table>
-                
-                <tr>
-                    <button>
-                        <a class = "boton_administrar"href="{% url 'agregarServicio' %}"> agregar</a>></a>
-                    </button>
-                    <th><strong>servicio</strong></th>
-                    <th><strong>descripcion</strong></th>
-                    <th><strong>precio</strong></th>
-                    <th><strong>administrar</strong></th>
-                </tr> 
-                {% for s in servicios %}      
-                <tr>
-                    <td>{{s.nombre}}</td>
-                    <td>{{s.descripcion}}</td>
-                    <td>{{s.precio}}</td>
-                    <td> 
-                        <button>
-                            <a class = "boton_administrar"href="{% url 'eliminarServicio' s.id %}"> Eliminar</a>></a>
-                        </button>
-                        
-                        <button>
-                            <a class = "boton_administrar"href="{% url 'editarServicio' s.id %}"> editar</a>></a>
-                        </button>
-                    </td>
-                    
-                </tr>
-                {% endfor %}
-            </table>
-            <div class="content-section-heading">
-                <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
-                <a class="btn btn-dark btn-xl" href="#clientes">CLIENTES</a>
-                <a class="btn btn-dark btn-xl" href="#empleados">EMPLEADOS</a>
-            </div>
 
-        
-        
-    </div>
+<section class="" id="servicios">
+    <header class="masthead d-flex align-items-center">
+        <div class="container px-4 px-lg-5 text-center"> 
+      
+            <div>
+                <h3>SERVICIOS </h3>
+                    <table>   
+                        <tr>
+                            <button>
+                                <a class = "boton_administrar"href="{% url 'agregarServicio' %}"> agregar</a>></a>
+                            </button>
+                            <th><strong>servicio</strong></th>
+                            <th><strong>descripcion</strong></th>
+                            <th><strong>precio</strong></th>
+                            <th><strong>administrar</strong></th>
+                        </tr> 
+                        {% for s in servicios %}      
+                        <tr>
+                            <td>{{s.nombre}}</td>
+                            <td>{{s.descripcion}}</td>
+                            <td>{{s.precio}}</td>
+                            <td> 
+                                <button>
+                                    <a class = "boton_administrar"href="{% url 'eliminarServicio' s.id %}"> Eliminar</a>></a>
+                                </button>
+                                
+                                <button>
+                                    <a class = "boton_administrar"href="{% url 'editarServicio' s.id %}"> editar</a>></a>
+                                </button>
+                            </td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="content-section-heading">
+                        <a class="btn btn-dark btn-xl" href="#clientes">CLIENTES</a>
+                        <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
+                        <a class="btn btn-dark btn-xl" href="#empleados">EMPLEADOS</a>
+                    </div>
+
+                
+                
+            </div>
+        </div>
+    </header>
 </section>
-{% endblock %}
+
 
 
 
@@ -173,7 +175,7 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
 
 <!-- DATOS EMPLEADOS -->
 
-{% block headertres %}
+
 <section class="" id="empleados">
     <header class="masthead d-flex align-items-center">
         <div class="container px-4 px-lg-5 text-center">
@@ -208,8 +210,8 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                         {% endfor %}
                     </table>
                     <div class="content-section-heading">
-                        <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
                         <a class="btn btn-dark btn-xl" href="#clientes">CLIENTES</a>
+                        <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
                         <a class="btn btn-dark btn-xl" href="#empleados">EMPLEADOS</a>
                     </div>
                 
@@ -227,9 +229,14 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
 
 
 <!-- NO SE VE -->
+{% block header %}
+{% endblock %}
 
 {% block callout %}
 {% endblock %}
 
 {% block action %}
+{% endblock %}
+
+{% block headerdos %}
 {% endblock %}

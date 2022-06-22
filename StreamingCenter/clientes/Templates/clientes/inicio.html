@@ -1,6 +1,20 @@
 {% extends "clientes/padre.html"  %}
 {% load static %}
 
+    
+{% block header %}
+
+<header class="masthead d-flex align-items-center">
+    <div class="container px-4 px-lg-5 text-center">
+        <h1 class="mb-1">StreamingCenter</h1>
+        <h3 class="mb-5"><em>{{mensaje}} </em></h3> {% csrf_token %}
+        <h3 class="mb-5"><em>Organiza tu tienda de manera UNICA</em></h3>
+        <a class="btn btn-primary btn-xl" href="#about">cosas para hacer</a>
+    </div>
+</header>
+{% endblock %}
+
+
 {% block callout %}
 {% endblock %}
 

@@ -33,11 +33,15 @@
         <a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
         <nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
+                
                 <li class="sidebar-nav-item"><a href="{% url 'inicio' %}">inicio</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'login' %} ">INICIAR SESION</a></li>
                 <li class="sidebar-nav-item"><a href="{% url 'agregarCliente' %}">agregar clientes</a></li>
                 <li class="sidebar-nav-item"><a href="{% url 'agregarEmpleado' %}">agregar empleados</a></li>
                 <li class="sidebar-nav-item"><a href="{% url 'agregarServicio' %}">agregar servicios</a></li>
                 <li class="sidebar-nav-item"><a href="{% url 'mostrarDatos' %} ">Datos de La Empresa</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'logout' %}">CERRAR SESION</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'logout' %}"></a>{{usuario}}</a></li>
             </ul>
         </nav>
         <!-- Header-->
@@ -54,6 +58,7 @@
             </div>
         </header>
         {% endblock %}
+    {% block login %}
         {% block headerdos %}
         <section class="content-section bg-light" id="about">
             <div class="container px-4 px-lg-5 text-center">
@@ -184,6 +189,7 @@
             </div>
         </section>
         {% endblock %}
+    {% endblock %}
         <!-- Footer-->
         <footer class="footer text-center">
             <div class="container px-4 px-lg-5">

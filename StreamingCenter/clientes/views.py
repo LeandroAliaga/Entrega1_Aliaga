@@ -1,9 +1,62 @@
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import render
 from django.template import loader
-from .forms import Cliente_formulario , Empleado_formulario, Servicio_formulario
+from .forms import Cliente_formulario , Empleado_formulario, Servicio_formulario, UserRegistrationForm
 from .models import Cliente, Servicios, Empleados
-from django.views.generic import View, TemplateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.urls import reverse_lazy
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate
+
+
+#---------------------------------------------------------------------------------------------------------------------
+#LOGIN
+
+def login_request(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            clave = form.cleaned_data.get('password')
+            #autenticacion
+            user = authenticate(username=usuario, password=clave)
+            if user is not None:
+                login(request, user)
+                return render(request, 'clientes/inicio.html', {'mensaje': f'Bienvenido {usuario}'})
+            else:
+                return render(request, 'clientes/inicio.html', {'mensaje': 'Usuario o contraseña incorrectos'})
+        else:
+            return render(request, 'clientes/inicio.html', {'mensaje': 'Usuario o contraseña incorrectos'})
+    else:
+        form = AuthenticationForm()
+        return render(request, 'clientes/login.html', {'form': form, 'usuario': request.user})
+        
+#---------------------------------------------------------------------------------------------------------------------
+#REGISTER
+
+def register_request(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            form.save()
+            return render(request, 'clientes/inicio.html', {'mensaje': f'USUARIO {username} CREADO'})
+        else:
+            return render(request, 'clientes/inicio.html', {'mensaje': 'ERROR NO SE PUDO CREAR EL USUARIO'})
+    else:
+        form = UserRegistrationForm()
+        return render(request, 'clientes/register.html', {'form': form})
+            
+#---------------------------------------------------------------------------------------------------------------------
+#LOGOUT
+
+       
+
+
+
+
+
+
 
 
 #---------------------------------------------------------------------------------------------------------------------
@@ -12,10 +65,8 @@ from django.views.generic import View, TemplateView
 class Inicio(TemplateView):
     template_name = 'clientes/inicio.html'
 
-
-
-
-
+#---------------------------------------------------------------------------------------------------------------------
+#MOSTRAR DATOS
 
 def mostrarDatos(request):
     clientes = Cliente.objects.all()
@@ -190,3 +241,34 @@ def editar_servicio(request, id):
     else:
         formulario_servicio = Servicio_formulario(initial={'nombre': servicio.nombre, 'descripcion': servicio.descripcion, 'precio': servicio.precio})
     return render(request, 'clientes/servicios_template.html', {'formulario_servicios': formulario_servicio})
+
+
+
+#---------------------------------------------------------------------------------------------------------------------
+#CLASES BASADAS EN VISTAS 
+
+class Cliente_list(ListView):
+    model = Cliente
+    template_name = 'clientes/mostrar.html'
+    
+    def __str__(self):
+        return self.nombre + " " + self.apellido + " " + str(self.servicio) + " " + str(self.fechaVencimiento) + " " + self.email + " " + self.contraseña
+    
+class Cliente_detail(DetailView):
+    model = Cliente
+    template_name = 'clientes/detalle.html'
+
+
+class Cliente_create(CreateView):
+    model = Cliente
+    success_url = reverse_lazy('mostrar')
+    fields = ['nombre', 'apellido', 'servicio', 'fechaVencimiento', 'email', 'contraseña']
+    
+class Cliente_update(UpdateView):
+    model = Cliente
+    success_url = reverse_lazy('mostrar')
+    fields = ['nombre', 'apellido', 'servicio', 'fechaVencimiento', 'email', 'contraseña']
+    
+class Cliente_delete(DeleteView):
+    model = Cliente
+    success_url = reverse_lazy('mostrar')
