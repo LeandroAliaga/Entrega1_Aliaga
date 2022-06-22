@@ -33,15 +33,14 @@
         <a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
         <nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                
-                <li class="sidebar-nav-item"><a href="{% url 'inicio' %}">inicio</a></li>
                 <li class="sidebar-nav-item"><a href="{% url 'login' %} ">INICIAR SESION</a></li>
-                <li class="sidebar-nav-item"><a href="{% url 'agregarCliente' %}">agregar clientes</a></li>
-                <li class="sidebar-nav-item"><a href="{% url 'agregarEmpleado' %}">agregar empleados</a></li>
-                <li class="sidebar-nav-item"><a href="{% url 'agregarServicio' %}">agregar servicios</a></li>
-                <li class="sidebar-nav-item"><a href="{% url 'mostrarDatos' %} ">Datos de La Empresa</a></li>
-                <li class="sidebar-nav-item"><a href="{% url 'logout' %}">CERRAR SESION</a></li>
-                <li class="sidebar-nav-item"><a href="{% url 'logout' %}"></a>{{usuario}}</a></li>
+                <br>
+                <li class="sidebar-nav-item"><a href="{% url 'inicio' %}">inicio</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'mostrarDatosClientes' %}">clientes</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'mostrarDatosEmpleados' %}">empleados</a></li>
+                <li class="sidebar-nav-item"><a href="{% url 'mostrarDatosServicios' %}">servicios</a></li>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <li class="sidebar-nav-item"><a href="{% url 'logout' %}">CERRAR SESION</a></li>                
             </ul>
         </nav>
         <!-- Header-->
@@ -85,24 +84,24 @@
                 <div class="row gx-4 gx-lg-5">
                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                         <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-home"></i></span>
-                        <h4><strong><b><a href="{% url 'mostrarDatos' %}"> MOSTRAR DATOS</a></b></strong></h4>
+                        <h4><strong><b><a href=""> MOSTRAR DATOS</a></b></strong></h4>
                         <p class="text-faded mb-0"></p>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                         <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-people"></i></span>
-                        <h4><strong><a href="{% url 'agregarCliente' %}"> AGREGAR CLIENTES</a></strong></h4>
+                        <h4><strong><a href="{% url 'mostrarDatosClientes' %}">CLIENTES</a></strong></h4>
                         <p class="text-faded mb-0">administra los clientes</p>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
                         <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-pie-chart"></i></span>
-                        <h4><strong><b><a href="{% url 'agregarEmpleado' %}"> AGREGAR EMPLEADOS</a></b></strong></h4>
+                        <h4><strong><b><a href="{% url 'mostrarDatosEmpleados' %}">EMPLEADOS</a></b></strong></h4>
                         <p class="text-faded mb-0">
                             administra los empleados
                         </p>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
                         <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-plus"></i></span>
-                        <h4><strong><b><a href="{% url 'agregarServicio' %}"> AGREGAR SERVICIOS</a></b></strong></h4>
+                        <h4><strong><b><a href="{% url 'mostrarDatosServicios' %}">SERVICIOS</a></b></strong></h4>
                         <p class="text-faded mb-0">
                             administra los servicios
                         </p>

@@ -1,6 +1,5 @@
 {% extends "clientes/padre.html"  %}
 {% load static %}
-
 <!-- ESTILOS CSS-->
 {% block estilos %}
 <style>
@@ -43,35 +42,11 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
 </style>
 {% endblock %}
 
-<!-- INICIO MOSTRAR DATOS -->
-{% block preheader %}
-    
-    <header class="masthead d-flex align-items-center">
-        <div class="container px-4 px-lg-5 text-center">
-            <div class="container px-4 px-lg-5">
-                <div class="content-section-heading">
-                    
-                    <h2 class="mb-5">TABLAS DE CONTENTIDO</h2>
-                    <a class="btn btn-dark btn-xl" href="#clientes">CLIENTES</a>
-                    <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
-                    <a class="btn btn-dark btn-xl" href="#empleados">EMPLEADOS</a>
-                </div>
-            </div>
-            
-        </div>
-    </header>
-    
 
 
 
 
-
-
-
-
-<!-- DATOS SERVICIOS-->
-
-
+{% block header %}
 <section class="" id="servicios">
     <header class="masthead d-flex align-items-center">
         <div class="container px-4 px-lg-5 text-center"> 
@@ -88,7 +63,7 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                             <th><strong>precio</strong></th>
                             <th><strong>administrar</strong></th>
                         </tr> 
-                        {% for s in servicios %}      
+                        {% for s in servicios %}     
                         <tr>
                             <td>{{s.nombre}}</td>
                             <td>{{s.descripcion}}</td>
@@ -106,11 +81,7 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                         </tr>
                         {% endfor %}
                     </table>
-                    <div class="content-section-heading">
-                        <a class="btn btn-dark btn-xl" href="#clientes">CLIENTES</a>
-                        <a class="btn btn-dark btn-xl" href="#servicios">SERVICIOS</a>
-                        <a class="btn btn-dark btn-xl" href="#empleados">EMPLEADOS</a>
-                    </div>
+
 
                 
                 
@@ -122,31 +93,7 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
 
 
 
-
-
-
-
-
-<!-- DATOS EMPLEADOS -->
-
-
-
 {% endblock %}
 
-
-
-
-
-
-<!-- NO SE VE -->
-{% block header %}
-{% endblock %}
-
-{% block callout %}
-{% endblock %}
-
-{% block action %}
-{% endblock %}
-
-{% block headerdos %}
+{% block login %}
 {% endblock %}

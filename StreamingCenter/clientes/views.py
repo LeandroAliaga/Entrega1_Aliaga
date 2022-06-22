@@ -47,10 +47,6 @@ def register_request(request):
         form = UserRegistrationForm()
         return render(request, 'clientes/register.html', {'form': form})
             
-#---------------------------------------------------------------------------------------------------------------------
-#LOGOUT
-
-       
 
 
 
@@ -66,17 +62,27 @@ class Inicio(TemplateView):
     template_name = 'clientes/inicio.html'
 
 #---------------------------------------------------------------------------------------------------------------------
-#MOSTRAR DATOS
+#MOSTRAR DATOS CLIENTES
 
-def mostrarDatos(request):
+def mostrarDatosClientes(request):
     clientes = Cliente.objects.all()
+    
+    return render(request, 'clientes/mostrar_datos_clientes.html', {'clientes': clientes})
+
+#---------------------------------------------------------------------------------------------------------------------
+#MOSTRAR DATOS EMPLEADOS
+
+def mostrarDatosEmpleados(request):
     empleados = Empleados.objects.all()
+    
+    return render(request, 'clientes/mostrar_datos_empleados.html', {'empleados': empleados})
+
+#---------------------------------------------------------------------------------------------------------------------
+#MOSTRAR DATOS SERVICIOS
+
+def mostrarDatosServicios(request):
     servicios = Servicios.objects.all()
-    
-    
-    return render(request, 'clientes/mostrar_datos.html', {'clientes': clientes, 'empleados': empleados, 'servicios': servicios})
-
-
+    return render(request, 'clientes/mostrar_datos_servicios.html', {'servicios': servicios})
 
 
 
@@ -111,7 +117,7 @@ def eliminar_cliente(request, id):
     
     clientes = Cliente.objects.all()
     contexto = {'clientes': clientes}
-    return render(request, 'mostrar_datos.html', contexto)
+    return render(request, 'mostrar_datos_clientes.html', contexto)
 
 def editar_cliente(request, id):
     cliente = Cliente.objects.get(id=id)
@@ -135,6 +141,11 @@ def editar_cliente(request, id):
     else:
         formulario_cliente = Cliente_formulario(initial={'nombre': cliente.nombre, 'apellido': cliente.apellido, 'fechaVencimiento': cliente.fechaVencimiento, 'email': cliente.email, 'contraseña': cliente.contraseña, 'servicio': cliente.servicio})
     return render(request, 'clientes/clientes_template.html', {'formulario_clientes': formulario_cliente})
+
+
+
+#---------------------------------------------------------------------------------------------------------------------
+#clientes
 
 def editar_empleado(request, id):
     empleado = Empleados.objects.get(id=id)
@@ -168,7 +179,7 @@ def eliminar_empleado(request, id):
     
     empleados = Empleados.objects.all()
     contexto = {'empleados': empleados}
-    return render(request, 'clientes/inicio.html')
+    return render(request, 'clientes/mostrar_datos_empleados.html', contexto)
 
 def editar_empleado(request, id):
     empleado = Empleados.objects.get(id=id)
@@ -186,7 +197,7 @@ def editar_empleado(request, id):
             
             empleado.save()
             
-            return render(request, 'clientes/inicio.html')
+            return render(request, 'clientes/mostrar_datos_empleados.html' )
     else:
         formulario_empleado = Empleado_formulario(initial={'nombre': empleado.nombre, 'apellido': empleado.apellido, 'area': empleado.area, 'antiguedad_meses': empleado.antiguedad_meses})
     return render(request, 'clientes/empleados_template.html', {'formulario_empleados': formulario_empleado})
@@ -207,7 +218,7 @@ def servicios_formulario(request):
             
             servicio.save()
             
-            return render(request, 'clientes/inicio.html')
+            return render(request, 'clientes/mostrar_datos_servicios.html')
     else:
         formulario_servicio = Servicio_formulario()
         
@@ -220,7 +231,7 @@ def eliminar_servicio(request, id):
     
     servicios = Servicios.objects.all()
     contexto = {'servicios': servicios}
-    return render(request, 'clientes/inicio.html')
+    return render(request, 'clientes/mostrar_datos_servicios.html', contexto)
 
 def editar_servicio(request, id):
     servicio = Servicios.objects.get(id=id)

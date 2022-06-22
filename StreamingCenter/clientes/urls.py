@@ -15,7 +15,6 @@ urlpatterns = [
     path("clientes/", views.clientes_formulario, name ="agregarCliente"),
     path("empleados/", views.empleados_formulario, name ="agregarEmpleado"),
     path("servicios/", views.servicios_formulario, name ="agregarServicio"),
-    path("mostrar/", views.mostrarDatos, name ="mostrarDatos"),
     path("eliminar/<id>", views.eliminar_cliente, name ="eliminarCliente"),
     path("eliminar_empleado/<id>", views.eliminar_empleado, name ="eliminarEmpleado"),
     path("eliminar_servicio/<id>", views.eliminar_servicio, name ="eliminarServicio"),
@@ -28,11 +27,11 @@ urlpatterns = [
     path('mostrar/editar/<pk>/', Cliente_update.as_view(), name='editar_clientes'),
     path('mostrar/eliminar/<pk>/', Cliente_delete.as_view(), name='eliminar_clientes'),
     path('mostrar/<pk>/', Cliente_detail.as_view(), name='detalle_clientes'),
+    
     #---------------------------------------------------------------------------------------------------------------------
-    path('login/', login_request, name='login'),
-    path('register/', register_request, name='registro'),
-    path('logout/', LogoutView.as_view(template_name='clientes/logout.html'), name='logout'),
-
+    path('clientesdata/', views.mostrarDatosClientes, name='mostrarDatosClientes'),
+    path('empleadosdata/', views.mostrarDatosEmpleados, name='mostrarDatosEmpleados'),
+    path('serviciosdata/', views.mostrarDatosServicios, name='mostrarDatosServicios'),
     
     
 ]
