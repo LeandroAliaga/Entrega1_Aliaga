@@ -60,6 +60,7 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                             <th><strong>nombre</strong></th>
                             <th><strong>apellido</strong></th>
                             <th><strong>area</strong></th>
+                            <th><strong>antiguedad/meses</strong></th>
                             <th><strong>administrar</strong></th>
                         </tr>
                         {% for e in empleados %}
@@ -67,6 +68,7 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                             <td>{{e.nombre}}</td>
                             <td>{{e.apellido}}</td>
                             <td>{{e.area}}</td>
+                            <td>{{e.antiguedad_meses}}</td>
                             <td> 
                                 <button>
                                     <a class = "boton_administrar"href="{% url 'eliminarEmpleado' e.id %}"> Eliminar</a>></a>

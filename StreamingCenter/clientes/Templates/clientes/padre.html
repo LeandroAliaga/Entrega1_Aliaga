@@ -33,14 +33,21 @@
         <a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
         <nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-nav-item"><a href="{% url 'login' %} ">INICIAR SESION</a></li>
+                {% if not request.user.is_authenticated %}
+                    <li class="sidebar-nav-item"><a href="{% url 'login' %} ">INICIAR SESION</a></li>
+                {% endif %}
+                {% if request.user.is_authenticated %}
+                    <li class="sidebar-nav-item"><a href="{% url 'logout' %} ">{{usuario}}</a></li>
+                {% endif %}
                 <br>
                 <li class="sidebar-nav-item"><a href="{% url 'inicio' %}">inicio</a></li>
                 <li class="sidebar-nav-item"><a href="{% url 'mostrarDatosClientes' %}">clientes</a></li>
                 <li class="sidebar-nav-item"><a href="{% url 'mostrarDatosEmpleados' %}">empleados</a></li>
                 <li class="sidebar-nav-item"><a href="{% url 'mostrarDatosServicios' %}">servicios</a></li>
                 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                <li class="sidebar-nav-item"><a href="{% url 'logout' %}">CERRAR SESION</a></li>                
+                {% if request.user.is_authenticated %}
+                    <li class="sidebar-nav-item"><a href="{% url 'logout' %}">CERRAR SESION</a></li>
+                {% endif %}
             </ul>
         </nav>
         <!-- Header-->

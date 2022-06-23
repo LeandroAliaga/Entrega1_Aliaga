@@ -63,6 +63,9 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                             <th><strong>nombre</strong></th>
                             <th><strong>apellido</strong></th>
                             <th><strong>servicio</strong></th>
+                            <th><strong>vencimiento</strong></th>
+                            <th><strong>email</strong></th>
+                            <th><strong>contraseña</strong></th>
                             <th><strong>administrar</strong></th>
                         </tr>
                         {% for c in clientes %}
@@ -70,6 +73,9 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                             <td>{{c.nombre}}</td>
                             <td>{{c.apellido}}</td>
                             <td>{{c.servicio}}</td>
+                            <td>{{c.fechaVencimiento}}</td>
+                            <td>{{c.email}}</td>
+                            <td>{{c.contraseña}}</td>
                             <td> 
                                 <button>
                                     <a class = "boton_administrar"href="{% url 'eliminarCliente' c.id %}"> Eliminar</a>></a>

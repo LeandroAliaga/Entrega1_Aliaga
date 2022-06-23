@@ -11,6 +11,8 @@ class Cliente(models.Model):
     servicio = models.CharField(max_length=30)
     def __str__(self):
         return self.nombre + " " + self.apellido + " " + str(self.servicio)
+    def datetime_string(self):
+        return self.fechaVencimiento.strftime("%Y-%m-%d")
     
      
 class Empleados(models.Model):
@@ -19,7 +21,7 @@ class Empleados(models.Model):
     area = models.CharField(max_length=30)
     antiguedad_meses = models.IntegerField()
     def __str__(self):
-        return self.nombre + " " + self.apellido + " " + self.area
+        return self.nombre + " " + self.apellido + " " + self.area + " " + str(self.antiguedad_meses)
     
 class Servicios(models.Model):
     nombre = models.CharField(max_length=30)

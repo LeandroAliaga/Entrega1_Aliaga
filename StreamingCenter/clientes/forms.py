@@ -2,17 +2,20 @@ from django import forms
 from datetime import date
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 
 
 
-
+    
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 
 
 class Cliente_formulario(forms.Form):
     nombre = forms.CharField(max_length=30)
     apellido = forms.CharField(max_length=30)
-    fechaVencimiento = forms.DateField()
+    fechaVencimiento = forms.DateField(widget=DateInput)
     email = forms.EmailField(max_length=254)
     contraseña = forms.CharField(max_length=30)
     servicio = forms.CharField(max_length=30)
@@ -42,7 +45,7 @@ class Empleado_formulario(forms.Form):
 class Servicio_formulario(forms.Form):
     nombre = forms.CharField(max_length=30)
     descripcion = forms.CharField(max_length=200)
-    precio = forms.IntegerField()
+    precio = forms.IntegerField( initial = 0)
     def clean_precio(self):
         precio = self.cleaned_data['precio']
         if precio < 0:
@@ -55,9 +58,26 @@ class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput)
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError('El nombre de usuario ya existe')
+        return username
+    
+        
+        
+    
+    
+    
     
     class meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
         help_text = {k:"" for k  in fields}
+    
+    
+    
+    
+    
+    
     

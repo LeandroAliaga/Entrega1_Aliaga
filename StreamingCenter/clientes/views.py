@@ -1,16 +1,18 @@
 from django.http import Http404, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.template import loader
 from .forms import Cliente_formulario , Empleado_formulario, Servicio_formulario, UserRegistrationForm
 from .models import Cliente, Servicios, Empleados
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView, View
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 #---------------------------------------------------------------------------------------------------------------------
 #LOGIN
+
 
 def login_request(request):
     if request.method == 'POST':
@@ -34,23 +36,49 @@ def login_request(request):
 #---------------------------------------------------------------------------------------------------------------------
 #REGISTER
 
-def register_request(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
+#def register_request(request):
+#    if request.method == 'POST':
+#        form = UserRegistrationForm(request.POST)
+#        if form.is_valid():
+#            username = form.cleaned_data.get('username')
+#            form.save()
+#            return render(request, 'clientes/inicio.html', {'mensaje': f'USUARIO {username} CREADO'})
+#        else:
+#            return render(request, 'clientes/inicio.html', {'mensaje': 'ERROR NO SE PUDO CREAR EL USUARIO'})
+#    else:
+#        form = UserRegistrationForm()
+#        return render(request, 'clientes/register.html', {'form': form})
+            
+#SI ESTA LOGEADO 
+
+class registro(View):
+    form_class = UserRegistrationForm
+    initial = {'key': 'value'}
+    template_name = 'clientes/register.html'
+    
+    def get(self, request):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request):
+        form = self.form_class(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             form.save()
             return render(request, 'clientes/inicio.html', {'mensaje': f'USUARIO {username} CREADO'})
         else:
             return render(request, 'clientes/inicio.html', {'mensaje': 'ERROR NO SE PUDO CREAR EL USUARIO'})
-    else:
-        form = UserRegistrationForm()
-        return render(request, 'clientes/register.html', {'form': form})
-            
+        
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('inicio')
+        return super(registro, self).dispatch(request, *args, **kwargs)
+    
+#---------------------------------------------------------------------------------------------------------------------
 
-
-
-
+def mostrarUsuarios(request):
+    username = request.user.username
+    return render(request, 'clientes/padre.html', {'username': username})
 
 
 
@@ -58,33 +86,50 @@ def register_request(request):
 #---------------------------------------------------------------------------------------------------------------------
 #inicio
 
-class Inicio(TemplateView):
+class Inicio(LoginRequiredMixin,TemplateView):
     template_name = 'clientes/inicio.html'
-
-#---------------------------------------------------------------------------------------------------------------------
-#MOSTRAR DATOS CLIENTES
-
-def mostrarDatosClientes(request):
-    clientes = Cliente.objects.all()
     
-    return render(request, 'clientes/mostrar_datos_clientes.html', {'clientes': clientes})
+
 
 #---------------------------------------------------------------------------------------------------------------------
-#MOSTRAR DATOS EMPLEADOS
+#MOSTRAR DATOS CLIENTES CBV
 
-def mostrarDatosEmpleados(request):
-    empleados = Empleados.objects.all()
+
+class MostrarDatosClientes(LoginRequiredMixin, ListView):
+    model = Cliente
+    template_name = 'clientes/mostrar_datos_clientes.html'
     
-    return render(request, 'clientes/mostrar_datos_empleados.html', {'empleados': empleados})
+    def get(self, request):
+        clientes = Cliente.objects.all()
+        return render(request, self.template_name, {'clientes': clientes})
+    
+    
+
+
+    
+    
 
 #---------------------------------------------------------------------------------------------------------------------
-#MOSTRAR DATOS SERVICIOS
+#MOSTRAR DATOS EMPLEADOS CBV
 
-def mostrarDatosServicios(request):
-    servicios = Servicios.objects.all()
-    return render(request, 'clientes/mostrar_datos_servicios.html', {'servicios': servicios})
+class mostrar_datos_empleados(LoginRequiredMixin, ListView):
+    model = Empleados
+    template_name = 'clientes/mostrar_datos_empleados.html'
+    
+    def get(self, request):
+        empleados = Empleados.objects.all()
+        return render(request, 'clientes/mostrar_datos_empleados.html', {'empleados': empleados})
+#---------------------------------------------------------------------------------------------------------------------
+#MOSTRAR DATOS SERVICIOS CBV
 
 
+class MostrarDatosServicios(LoginRequiredMixin, ListView):
+    model = Servicios
+    template_name = 'clientes/mostrar_datos_servicios.html'
+    
+    def get(self, request):
+        servicios = Servicios.objects.all()
+        return render(request, 'clientes/mostrar_datos_servicios.html', {'servicios': servicios})
 
 
 
@@ -145,7 +190,7 @@ def editar_cliente(request, id):
 
 
 #---------------------------------------------------------------------------------------------------------------------
-#clientes
+#Empleados
 
 def editar_empleado(request, id):
     empleado = Empleados.objects.get(id=id)
@@ -204,7 +249,7 @@ def editar_empleado(request, id):
 
 
 #---------------------------------------------------------------------------------------------------------------------
-#servicios
+#Servicios
 
 def servicios_formulario(request):
     
@@ -258,28 +303,3 @@ def editar_servicio(request, id):
 #---------------------------------------------------------------------------------------------------------------------
 #CLASES BASADAS EN VISTAS 
 
-class Cliente_list(ListView):
-    model = Cliente
-    template_name = 'clientes/mostrar.html'
-    
-    def __str__(self):
-        return self.nombre + " " + self.apellido + " " + str(self.servicio) + " " + str(self.fechaVencimiento) + " " + self.email + " " + self.contraseña
-    
-class Cliente_detail(DetailView):
-    model = Cliente
-    template_name = 'clientes/detalle.html'
-
-
-class Cliente_create(CreateView):
-    model = Cliente
-    success_url = reverse_lazy('mostrar')
-    fields = ['nombre', 'apellido', 'servicio', 'fechaVencimiento', 'email', 'contraseña']
-    
-class Cliente_update(UpdateView):
-    model = Cliente
-    success_url = reverse_lazy('mostrar')
-    fields = ['nombre', 'apellido', 'servicio', 'fechaVencimiento', 'email', 'contraseña']
-    
-class Cliente_delete(DeleteView):
-    model = Cliente
-    success_url = reverse_lazy('mostrar')
