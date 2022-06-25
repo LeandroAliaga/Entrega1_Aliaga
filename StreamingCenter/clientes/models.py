@@ -1,5 +1,7 @@
 from django.db import models
 import uuid
+from django.contrib.auth.models import User
+from django.db.models.fields.files import ImageField
 
 
 class Cliente(models.Model):
@@ -29,3 +31,7 @@ class Servicios(models.Model):
     precio = models.IntegerField()
     def __str__(self):
         return self.nombre + " " + str(self.precio) + " " + self.descripcion
+    
+class Avatar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to="avatares", null=True, blank=True)

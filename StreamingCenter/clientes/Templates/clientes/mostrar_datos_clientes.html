@@ -35,9 +35,6 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
     display:flex;
     float:right;
 }
-.boton_administrar{
-    color:black;
-}
 
 </style>
 {% endblock %}
@@ -53,12 +50,18 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
             
             <div>
                 <h3>CLIENTES </h3>
-                
+
+                    <form class="navbar-search" method="POST" action="buscar_cliente.html"> {% csrf_token %}
+                        <input type="text" class="form-control" placeholder="Buscar cliente" name="buscar_cliente">
+                        <div class = "btn">
+                            <button class="btn btn-primary "><i class="fas fa-search"></i>BUSCAR</button>
+                        </div>
+                    </form>
                 
                     <table>
                         <tr>
-                            <button>
-                                <a class = "boton_administrar"href="{% url 'agregarCliente' %}"> Agregar</a>></a>
+                            <button class = "btn btn-primary btn-dark">
+                                <a href="{% url 'agregarCliente' %}"> Agregar</a></a>
                             </button>
                             <th><strong>nombre</strong></th>
                             <th><strong>apellido</strong></th>
@@ -77,11 +80,11 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                             <td>{{c.email}}</td>
                             <td>{{c.contraseña}}</td>
                             <td> 
-                                <button>
-                                    <a class = "boton_administrar"href="{% url 'eliminarCliente' c.id %}"> Eliminar</a>></a>
+                                <button class = "btn btn-primary btn-dark">
+                                    <a href="{% url 'eliminarCliente' c.id %}"> Eliminar</a></a>
                                 </button>
-                                <button>
-                                    <a class = "boton_administrar"href="{% url 'editarCliente' c.id %}"> Editar</a>></a>
+                                <button class = "btn btn-primary btn-dark">
+                                    <a href="{% url 'editarCliente' c.id %}"> Editar</a></a>
                                 </button>
                             </td>
                         </tr>

@@ -54,8 +54,8 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                 <h3>EMPLEADOS </h3>
                     <table>
                         <tr>
-                            <button>
-                                <a class = "boton_administrar"href="{% url 'agregarEmpleado' %}"> agregar</a>></a>
+                            <button class = "btn btn-primary btn-dark">
+                                <a href="{% url 'agregarEmpleado' %}"> agregar</a>></a>
                             </button>
                             <th><strong>nombre</strong></th>
                             <th><strong>apellido</strong></th>
@@ -70,12 +70,12 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                             <td>{{e.area}}</td>
                             <td>{{e.antiguedad_meses}}</td>
                             <td> 
-                                <button>
-                                    <a class = "boton_administrar"href="{% url 'eliminarEmpleado' e.id %}"> Eliminar</a>></a>
+                                <button class = "btn btn-primary btn-dark">
+                                    <a href="{% url 'eliminarEmpleado' e.id %}"> Eliminar</a>></a>
                                 </button>
                                 
-                                <button>
-                                    <a class = "boton_administrar"href="{% url 'editarEmpleado' e.id %}"> editar</a>></a>
+                                <button class = "btn btn-primary btn-dark">
+                                    <a href="{% url 'editarEmpleado' e.id %}"> editar</a>></a>
                                 </button>
                             </td>
                             

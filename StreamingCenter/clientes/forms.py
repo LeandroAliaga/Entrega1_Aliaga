@@ -1,3 +1,4 @@
+from tkinter import Label
 from django import forms
 from datetime import date
 from django.contrib.auth.forms import UserCreationForm
@@ -79,5 +80,34 @@ class UserRegistrationForm(UserCreationForm):
     
     
     
+class avatarFormulario(forms.Form):
+    imagen=forms.ImageField(required=True)
     
     
+    
+    
+class UserEditForm(UserCreationForm):
+    firt_name = forms.CharField(label='modificar nombre')
+    last_name = forms.CharField(label='modificar apellido')
+    username = forms.CharField(label='modificar nombre de usuario', required=False)
+    email = forms.EmailField(required=True)
+    password1 = forms.CharField(label='modificar Contraseña', widget=forms.PasswordInput, required=False)
+    password2 = forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput, required=False)
+
+    
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError('El nombre de usuario ya existe')
+        return username
+    
+     
+        
+    
+    
+    
+    
+    class meta:
+        model = User
+        fields = ['username', 'email','firs_name','last_name' 'password1', 'password2']
+        help_text = {k:"" for k  in fields}

@@ -1,0 +1,30 @@
+{% extends "clientes/padre.html"  %}
+{% load static %}
+
+
+{% block header %}
+<section class="" id="clientes">
+    <header class="masthead d-flex align-items-center">
+        <div class="container px-4 px-lg-5 text-center">
+            
+            <div>
+                <h3>EDITA TU PERFIL</h3>
+                    <form action="{% url 'editarPerfil' %}" method="POST"> {% csrf_token %}
+                        <h3>ingrese usuario y contraseña</h3>
+                        {{ formulario.as_p }}    
+                        <input type="submit" class="btn btn-primary" value="Guardar">
+                    </form>
+
+                
+            
+    </header>
+</section>
+{% endblock %}
+
+
+
+
+
+
+{% block login %}
+{% endblock %}

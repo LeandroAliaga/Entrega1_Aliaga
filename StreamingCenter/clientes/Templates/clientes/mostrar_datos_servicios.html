@@ -35,9 +35,7 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
     display:flex;
     float:right;
 }
-.boton_administrar{
-    color:black;
-}
+
 
 </style>
 {% endblock %}
@@ -55,9 +53,9 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                 <h3>SERVICIOS </h3>
                     <table>   
                         <tr>
-                            <button>
-                                <a class = "boton_administrar"href="{% url 'agregarServicio' %}"> agregar</a>></a>
-                            </button>
+                            <button class = "btn btn-primary btn-dark"><a href="{% url 'agregarServicio' %}"> agregar</a></a></button>
+                                
+                            
                             <th><strong>servicio</strong></th>
                             <th><strong>descripcion</strong></th>
                             <th><strong>precio</strong></th>
@@ -69,12 +67,12 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
                             <td>{{s.descripcion}}</td>
                             <td>{{s.precio}}<span class="input-group-addon">$</span></td>
                             <td> 
-                                <button>
-                                    <a class = "boton_administrar"href="{% url 'eliminarServicio' s.id %}"> Eliminar</a>></a>
+                                <button class = "btn btn-primary btn-dark">
+                                    <a href="{% url 'eliminarServicio' s.id %}"> Eliminar</a>></a>
                                 </button>
                                 
-                                <button>
-                                    <a class = "boton_administrar"href="{% url 'editarServicio' s.id %}"> editar</a>></a>
+                                <button class = "btn btn-primary btn-dark">
+                                    <a href="{% url 'editarServicio' s.id %}"> editar</a>></a>
                                 </button>
                             </td>
                             
