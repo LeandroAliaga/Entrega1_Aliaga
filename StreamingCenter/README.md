@@ -29,4 +29,5 @@ Leandro Tomas Aliaga
 ## ACLARACIONES IMPORTANTES
 ***
 
-* El buscador de dichas bases de datos solo busca con una palabra , indiferente de mayuscula/minuscula pero si hace diferencia para acentuaciones 
+* El buscador de dichas bases de datos solo busca con una palabra , indiferente de mayuscula/minuscula pero si hace diferencia para acentuaciones
+* SUPERUSUARIO creado para revision de ADMIN = usuario : octavio | contraseña : octavio  
