@@ -11,7 +11,8 @@ from django.forms import ModelForm
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-
+#---------------------------------------------------------------------------------------------------------------------#
+ #CLIENTES
 
 class Cliente_formulario(forms.Form):
     nombre = forms.CharField(max_length=30)
@@ -30,7 +31,8 @@ class Cliente_formulario(forms.Form):
         if fechaVencimiento < date.today():
             raise forms.ValidationError("La fecha de vencimiento no puede ser menor a la fecha actual")
         return fechaVencimiento
-    
+#---------------------------------------------------------------------------------------------------------------------#
+ #EMPLEADOS    
     
 class Empleado_formulario(forms.Form):
     nombre = forms.CharField(max_length=30)
@@ -42,10 +44,11 @@ class Empleado_formulario(forms.Form):
         if area != "ADMINISTRACION" and area != "VENTAS" and area != "DESARROLLO":
             raise forms.ValidationError("porfavor ingrese un area valida 'ADMINISTRACION', 'VENTAS' o 'DESARROLLO'")
         return area
-    
+#---------------------------------------------------------------------------------------------------------------------#
+ #SERVICIOS
 class Servicio_formulario(forms.Form):
     nombre = forms.CharField(max_length=30)
-    descripcion = forms.CharField(max_length=200)
+    descripcion = forms.CharField(max_length=900)
     precio = forms.IntegerField( initial = 0)
     def clean_precio(self):
         precio = self.cleaned_data['precio']
@@ -53,7 +56,11 @@ class Servicio_formulario(forms.Form):
             raise forms.ValidationError("El precio no puede ser negativo")
         return precio
 
-        
+#---------------------------------------------------------------------------------------------------------------------#
+ #REGISTRAR USUARIO
+ 
+ 
+         
 class UserRegistrationForm(UserCreationForm):
     username = forms.CharField(max_length=30)
     email = forms.EmailField(required=True)
@@ -79,11 +86,10 @@ class UserRegistrationForm(UserCreationForm):
     
     
     
+
     
-class avatarFormulario(forms.Form):
-    imagen=forms.ImageField(required=True)
-    
-    
+ #---------------------------------------------------------------------------------------------------------------------#
+ #EDITAR USUARIO    
     
     
 class UserEditForm(UserCreationForm):
@@ -94,17 +100,13 @@ class UserEditForm(UserCreationForm):
     password1 = forms.CharField(label='modificar Contraseña', widget=forms.PasswordInput, required=False)
     password2 = forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput, required=False)
 
+
     
     def clean_username(self):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError('El nombre de usuario ya existe')
         return username
-    
-     
-        
-    
-    
     
     
     class meta:

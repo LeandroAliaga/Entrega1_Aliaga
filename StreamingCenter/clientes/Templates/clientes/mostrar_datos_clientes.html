@@ -51,18 +51,20 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
             <div>
                 <h3>CLIENTES </h3>
 
-                    <form class="navbar-search" method="POST" action="buscar_cliente.html"> {% csrf_token %}
-                        <input type="text" class="form-control" placeholder="Buscar cliente" name="buscar_cliente">
+                    <form class="navbar-search" method="POST"> {% csrf_token %}
+                        <input type="text" class="form-control" placeholder="Buscar cliente" name="buscar_cliente" value="">
                         <div class = "btn">
                             <button class="btn btn-primary "><i class="fas fa-search"></i>BUSCAR</button>
                         </div>
                     </form>
-                
+                    <h3 class="mb-5"><em>{{mensaje}} </em></h3>
                     <table>
                         <tr>
                             <button class = "btn btn-primary btn-dark">
                                 <a href="{% url 'agregarCliente' %}"> Agregar</a></a>
                             </button>
+
+                            
                             <th><strong>nombre</strong></th>
                             <th><strong>apellido</strong></th>
                             <th><strong>servicio</strong></th>

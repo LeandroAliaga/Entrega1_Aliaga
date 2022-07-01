@@ -52,6 +52,13 @@ table tr td h4 {margin:0; padding:0; font-weight:normal;}
         <div class="container px-4 px-lg-5 text-center">
             <div>
                 <h3>EMPLEADOS </h3>
+                    <form class="navbar-search" method="POST"> {% csrf_token %}
+                        <input type="text" class="form-control" placeholder="Buscar empleado" name="buscar_empleado" value="">
+                        <div class = "btn">
+                            <button class="btn btn-primary "><i class="fas fa-search"></i>BUSCAR</button>
+                        </div>
+                    </form>
+                    <h3 class="mb-5"><em>{{mensaje}} </em></h3>                
                     <table>
                         <tr>
                             <button class = "btn btn-primary btn-dark">

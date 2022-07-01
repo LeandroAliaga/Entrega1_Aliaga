@@ -1,0 +1,60 @@
+{% extends "clientes/padre.html"  %}
+{% load static %}
+
+{% block estilos %}
+<style>
+    img{
+    width: 200px;
+    height: 200px;
+    position: relative;
+    border-color: #1D809F;
+    border-style: solid;
+    
+}
+em{
+    
+    color: black;
+    position: inherit;
+    
+}
+h3{
+    color: black;
+    position: inherit;
+}
+
+</style>
+
+
+{% endblock %}
+
+
+{% block header %}
+<section class="" id="clientes">
+    <header class="masthead d-flex align-items-center">
+        <div class="container px-4 px-lg-5 text-center">
+            <img src="{% static 'clientes/assets/img/yo.jpg' %}">
+            <h1 class="mb-1">Leandro Tomas Aliaga</h1>
+            <p class="lead mb-5"> 
+                <h3>
+                    <em>
+                        Mi nombre es Leandro Aliaga, tengo 23 años, soy de la ciudad de Mercedes Buenos Aires, Argentina.
+                        Soy asistente informatico y tengo una pasion por la tecnologia que nace desde hace muchos años, lo que me impulsa hoy a seguir 
+                        perfeccionandome dia a dia. Actualmente estoy interiorizando en el lenguaje de programacion Python <span class="fab fa-python"></span>, y estoy aprendiendo a utilizar
+                        las herramientas de desarrollo web como Django. Tengo un conocimiento basico en HTML <span class="fab fa-html5"></span>, CSS <span class="fab fa-css3-alt"></span>, Javascript <span class="fab fa-js-square"></span>.
+                        
+                    </em>
+                </h3>
+            </p>         
+            <div>
+                <a class="btn btn-primary btn-xl" href="{% url 'inicio' %}">INICIO</a>
+            </div>
+</section>
+{% endblock %}
+
+
+
+
+
+
+{% block login %}
+{% endblock %}

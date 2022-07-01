@@ -2,19 +2,19 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 from .forms import Cliente_formulario , Empleado_formulario, Servicio_formulario, UserRegistrationForm, UserEditForm
-from .models import Cliente, Servicios, Empleados, Avatar
+from .models import Cliente, Servicios, Empleados
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView, View
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-
+from django.db.models import Q
 
 
 #---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------
 #LOGIN
-
 
 def login_request(request):
     if request.method == 'POST':
@@ -49,6 +49,7 @@ def editarPerfil(request):
             usuario.email = informacion['email']
             usuario.password1 = informacion['password1']
             usuario.password2 = informacion['password2']
+            usuario.imagen = informacion['imagen']
             usuario.save()
             return render(request, 'clientes/inicio.html', {'mensaje': 'Perfil editado correctamente'})
     else:
@@ -60,8 +61,8 @@ def editarPerfil(request):
 
 
 
-
-
+#---------------------------------------------------------------------------------------------------------------------
+#REGISTRARSE
 
 
 class registro(View):
@@ -86,28 +87,38 @@ class registro(View):
         if request.user.is_authenticated:
             return redirect('inicio')
         return super(registro, self).dispatch(request, *args, **kwargs)
+
+
+
+
     
 #---------------------------------------------------------------------------------------------------------------------
-#avatar
-
-def avatar(request):
-        avatar = Avatar.objects.filter(user=request.user.id)
-        return render(request, 'clientes/inicio.html', {"imagen":avatar[0].imagen.url})
+#---------------------------------------------------------------------------------------------------------------------
+#ABOUT ME 
+        
     
+class Aboutme(TemplateView):
+    template_name: str = 'clientes/aboutme.html'
 
 
 
 
-
-
+#---------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------
 #inicio
 
-class Inicio(LoginRequiredMixin,TemplateView):
+class Inicio(TemplateView):
     template_name = 'clientes/inicio.html'
     
     
-
+    
+    
+    
+    
+#---------------------------------------------------------------------------------------------------------------------    
+#---------------------------------------------------------------------------------------------------------------------    
+#---------------------------------------------------------------------------------------------------------------------    
+#MOSTRAR DATOS
 
 #---------------------------------------------------------------------------------------------------------------------
 #MOSTRAR DATOS CLIENTES CBV
@@ -120,11 +131,21 @@ class MostrarDatosClientes(LoginRequiredMixin, ListView):
     def get(self, request):
         clientes = Cliente.objects.all().order_by('-nombre')
         return render(request, self.template_name, {'clientes': clientes})
-    
-    
+        
+    def post(self, request):
+        query = request.POST['buscar_cliente']
+        clientes = Cliente.objects.all
+        if query:
+            clientes = Cliente.objects.filter(Q(nombre__icontains=query) | Q(apellido__icontains=query) | Q(servicio__icontains=query))
+            if not clientes:
+                return render(request, self.template_name, {'clientes': clientes, 'mensaje': 'No se encontraron resultados'})
+            return render(request, self.template_name, {'clientes': clientes})
+        elif query == '':
+            return render(request, self.template_name, {'clientes': clientes, 'mensaje': 'No se ha ingresado ningun cliente'})
+            
+        else:
+            return render(request, self.template_name, {'clientes': clientes})
 
-
-    
     
 
 #---------------------------------------------------------------------------------------------------------------------
@@ -137,6 +158,19 @@ class mostrar_datos_empleados(LoginRequiredMixin, ListView):
     def get(self, request):
         empleados = Empleados.objects.all()
         return render(request, 'clientes/mostrar_datos_empleados.html', {'empleados': empleados})
+    
+    
+    def post(self, request):
+        query = request.POST['buscar_empleado']
+        empleados = Empleados.objects.all
+        if query:
+            empleados = Empleados.objects.filter(Q(nombre__icontains=query) | Q(apellido__icontains=query) | Q(area__icontains=query))
+            if not empleados:
+                return render(request, self.template_name, {'mensaje': 'No se encontraron resultados'})
+            return render(request, self.template_name, {'empleados': empleados})
+        elif query == '':
+            return render(request, self.template_name, {'empleados': empleados, 'mensaje': 'No se ha ingresado ningun empleado'})
+
 #---------------------------------------------------------------------------------------------------------------------
 #MOSTRAR DATOS SERVICIOS CBV
 
@@ -148,12 +182,30 @@ class MostrarDatosServicios(LoginRequiredMixin, ListView):
     def get(self, request):
         servicios = Servicios.objects.all()
         return render(request, 'clientes/mostrar_datos_servicios.html', {'servicios': servicios})
+    
+    def post(self, request):
+        query = request.POST['buscar_servicio']
+        servicios = Servicios.objects.all
+        if query:
+            servicios = Servicios.objects.filter(Q(nombre__icontains=query))
+            if not servicios:
+                return render(request, self.template_name, {'mensaje': 'No se encontraron resultados'})
+            return render(request, self.template_name, {'servicios': servicios})
+        elif query == '':
+            return render(request, self.template_name, {'servicios': servicios, 'mensaje': 'No se ha ingresado ningun servicio'})
+        else:
+            return render(request, self.template_name, {'servicios': servicios, 'mensaje': 'NO HAY DATOS PARA MOSTRAR'})
 
+
+#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------
+#CLIENTES
 
 
 
 #---------------------------------------------------------------------------------------------------------------------
-#clientes
+#FORMULARIO CLIENTES
 
 @login_required
 def clientes_formulario(request):
@@ -168,12 +220,14 @@ def clientes_formulario(request):
             
             cliente.save()
             
-            return render(request, 'clientes/inicio.html')
+            return render(request, 'clientes/inicio.html', {'mensaje': 'Cliente creado exitosamente'})
     else:
         miFormulario = Cliente_formulario()
             
-    return render(request, 'clientes/clientes_template.html', {'formulario_clientes': miFormulario})
+    return render(request, 'clientes/clientes_template.html', {'formulario_clientes': miFormulario, })
 
+#---------------------------------------------------------------------------------------------------------------------
+#ELIMINAR CLIENTES 
 
 @login_required
 def eliminar_cliente(request, id):
@@ -184,6 +238,8 @@ def eliminar_cliente(request, id):
     contexto = {'clientes': clientes}
     return render(request, 'mostrar_datos_clientes.html', contexto)
 
+#---------------------------------------------------------------------------------------------------------------------
+#EDITAR CLIENTES
 
 @login_required
 def editar_cliente(request, id):
@@ -204,32 +260,24 @@ def editar_cliente(request, id):
             
             cliente.save()
             
-            return render(request, 'clientes/inicio.html' , {'mensaje': 'CLIENTE EDITADO'})
+            
+            return render(request, 'clientes/inicio.html' , {'mensaje': 'CLIENTE EDITADO EXITOSAMENTE'})
     else:
         formulario_cliente = Cliente_formulario(initial={'nombre': cliente.nombre, 'apellido': cliente.apellido, 'fechaVencimiento': cliente.fechaVencimiento, 'email': cliente.email, 'contraseña': cliente.contraseña, 'servicio': cliente.servicio})
     return render(request, 'clientes/clientes_template.html', {'formulario_clientes': formulario_cliente})
 
-class BuscarCliente(TemplateView):
-    
-    
-    def post(self, request):
-        buscar = request.POST['buscar_cliente']
-        clientes = Cliente.objects.filter(nombre__icontains = buscar)
-        return render(request, 'clientes/buscar_cliente.html', {'clientes': clientes})
-    
-    def get(self, request, *args, **kwargs):
-        return render(request, 'clientes/buscar_cliente.html')
-   
-    
 
 
 
 #---------------------------------------------------------------------------------------------------------------------
-#Empleados
+#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------
+#EMPLEADOS
 
     
 
-
+#---------------------------------------------------------------------------------------------------------------------
+#FORMULARIO EMPLEADOS
 
 @login_required
 def empleados_formulario(request):
@@ -244,11 +292,13 @@ def empleados_formulario(request):
             
             empleado.save()
             
-            return render(request, 'clientes/inicio.html')
+            return render(request, 'clientes/inicio.html', {'mensaje': 'Empleado creado exitosamente'})
     else:
         formulario_empleado = Empleado_formulario()
         
     return render(request, 'clientes/empleados_template.html', {'formulario_empleados': formulario_empleado})
+#---------------------------------------------------------------------------------------------------------------------
+#ELIMINAR EMPLEADOS
 
 @login_required
 def eliminar_empleado(request, id):
@@ -258,6 +308,8 @@ def eliminar_empleado(request, id):
     empleados = Empleados.objects.all()
     contexto = {'empleados': empleados}
     return render(request, 'clientes/mostrar_datos_empleados.html', contexto)
+#---------------------------------------------------------------------------------------------------------------------
+#EDITAR EMPLEADOS 
 
 @login_required
 def editar_empleado(request, id):
@@ -276,14 +328,23 @@ def editar_empleado(request, id):
             
             empleado.save()
             
-            return render(request, 'clientes/mostrar_datos_empleados.html' )
+            return render(request, 'clientes/inicio.html', {'mensaje': 'Empleado editado exitosamente'})
     else:
         formulario_empleado = Empleado_formulario(initial={'nombre': empleado.nombre, 'apellido': empleado.apellido, 'area': empleado.area, 'antiguedad_meses': empleado.antiguedad_meses})
     return render(request, 'clientes/empleados_template.html', {'formulario_empleados': formulario_empleado})
 
 
+
+
 #---------------------------------------------------------------------------------------------------------------------
-#Servicios
+#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------
+#SERVICIOS
+
+
+#---------------------------------------------------------------------------------------------------------------------
+#FORMULARIO SERVICIOS
+
 @login_required
 def servicios_formulario(request):
     
@@ -297,11 +358,13 @@ def servicios_formulario(request):
             
             servicio.save()
             
-            return render(request, 'clientes/mostrar_datos_servicios.html')
+            return render(request, 'clientes/inicio.html', {'mensaje': 'Servicio creado exitosamente'})
     else:
         formulario_servicio = Servicio_formulario()
         
     return render(request, 'clientes/servicios_template.html', {'formulario_servicios': formulario_servicio})
+#---------------------------------------------------------------------------------------------------------------------
+#ELIMINAR SERVICIO
 
 @login_required
 def eliminar_servicio(request, id):
@@ -311,6 +374,8 @@ def eliminar_servicio(request, id):
     servicios = Servicios.objects.all()
     contexto = {'servicios': servicios}
     return render(request, 'clientes/mostrar_datos_servicios.html', contexto)
+#---------------------------------------------------------------------------------------------------------------------
+#ADITAR SERVICIO
 
 @login_required
 def editar_servicio(request, id):
@@ -328,7 +393,7 @@ def editar_servicio(request, id):
             
             servicio.save()
             
-            return render(request, 'clientes/inicio.html')
+            return render(request, 'clientes/inicio.html', {'mensaje': 'Servicio editado exitosamente'})
     else:
         formulario_servicio = Servicio_formulario(initial={'nombre': servicio.nombre, 'descripcion': servicio.descripcion, 'precio': servicio.precio})
     return render(request, 'clientes/servicios_template.html', {'formulario_servicios': formulario_servicio})
@@ -336,7 +401,23 @@ def editar_servicio(request, id):
 
 
 
+#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------
+#ERRORES
 
 class Error404View(TemplateView):
     template_name = 'clientes/error404.html'
+    
+class Error505View(TemplateView):
+    template_name = 'clientes/error500.html'
+    
+    @classmethod
+    def as_error_view(cls):
+        v = cls.as_view()
+        def view(request):
+            r = v(request)
+            r.render()
+            return r
+        return view
     
