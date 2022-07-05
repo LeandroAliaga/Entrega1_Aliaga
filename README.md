@@ -3,15 +3,15 @@
 
 
 ## TABLA DE CONTENIDO 
-1. [INFORMACION SOBRE EL PROYECTO](#INFORMACION SOBRE EL PROYECTO)
-2. [COSAS A IMPLEMENTAR](#COSAS A IMPLEMENTAR)
+1. [INFORMACION](#informacion)
+2. [IMPLEMENTAR](#implementar)
 3. [INSTALACIONES](#instalaciones)
 4. [CREADOR](#creador)
-5. [ACLARACIONES IMPORTANTES](#ACLARACIONES IMPORTANTES)
-5. [VIDEO SOBRE EL PROYECTO](#VIDEO SOBRE EL PROYECTO)
+5. [ACLARACIONES](#aclaraciones)
+5. [VIDEO SOBRE EL PROYECTO](#video-sobre-el-proyecto)
 
 
-## INFORMACION SOBRE EL PROYECTO 
+## INFORMACION
 ***
 StreamingCenter es una plataforma pensada exclusivamente para administradores de una empresa, la cual distribuye y comercializa distintos servicios de streaming a clientes. En la misma podemos encontrar el control en cuantos a datos de los mismos EMPLEADOS, CLIENTES y SERVICIOS. Este control se basa en buscar, editar, eliminar y agregar cualquiera de los 3 items marcados anteriormente.Administradores podran tener una web donde administrar los datos y consultarlos para facilitar su trabajo y ofrecer un servicio mas rapido y satifactorio para los clientes y empleados de dicha empresa.
 
