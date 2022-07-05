@@ -3,11 +3,12 @@
 
 
 ## TABLA DE CONTENIDO 
-1. [INFORMACION SOBRE EL PROYECTO](#proyecto)
-2. [COSAS A IMPLEMENTAR](#A-mejorar)
+1. [INFORMACION SOBRE EL PROYECTO](#INFORMACION SOBRE EL PROYECTO)
+2. [COSAS A IMPLEMENTAR](#COSAS A IMPLEMENTAR)
 3. [INSTALACIONES](#instalaciones)
 4. [CREADOR](#creador)
-5. [ACLARACIONES IMPORTANTES](#aclaraciones)
+5. [ACLARACIONES IMPORTANTES](#ACLARACIONES IMPORTANTES)
+5. [VIDEO SOBRE EL PROYECTO](#VIDEO SOBRE EL PROYECTO)
 
 
 ## INFORMACION SOBRE EL PROYECTO 
@@ -39,6 +40,8 @@ Leandro Tomas Aliaga
 * SUPERUSUARIO creado para revision de ADMIN = usuario : lea | contraseña : lea  
 
 
+## VIDEO SOBRE EL PROYECTO
+***
 
 
 [![Alt text](https://img.youtube.com/vi/T1qieY00XBA/0.jpg)](https://www.youtube.com/watch?v=T1qieY00XBA)
