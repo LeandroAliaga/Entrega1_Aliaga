@@ -4,7 +4,7 @@
 
 ## TABLA DE CONTENIDO 
 1. [INFORMACION](#informacion)
-2. [IMPLEMENTAR](#implementar)
+2. [COSAS A IMPLEMENTAR](#cosas-a-implementar)
 3. [INSTALACIONES](#instalaciones)
 4. [CREADOR](#creador)
 5. [ACLARACIONES](#aclaraciones)
