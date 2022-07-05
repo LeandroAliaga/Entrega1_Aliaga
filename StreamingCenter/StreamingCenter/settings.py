@@ -57,7 +57,7 @@ ROOT_URLCONF = 'StreamingCenter.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['C:/Users/Lea/Desktop/PROYECTO_FINAL/StreamingCenter/clientes/Templates/clientes'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -16,10 +16,18 @@ StreamingCenter es una plataforma pensada exclusivamente para administradores de
 
 ## COSAS A IMPLEMENTAR
 ***
-El trabajo podria mejorar mucho en cuanto a implementaciones de precio , calculos basados en presupuestos y economia de dicha empresa. Buscar la implementacion de automatizar que los servicios que se adhieran puedan ser agregados y ser seleccionados para enlazarlo a algun cliente
+* El trabajo podria mejorar mucho en cuanto a implementaciones de precio , calculos basados en presupuestos y economia de dicha empresa. Buscar la implementacion de automatizar que los servicios que se adhieran puedan ser agregados y ser seleccionados para enlazarlo a algun cliente.
+* deploy a heroku (intente implementarlo pero por temas de tiempo se me hizo imposible devugear el error, actualmente lo implemento por fuera de la entrega en otra rama)
 
 ## INSTALACIONES
 ***
+versionPython==3.10.4
+Django==4.0.4
+python-dateutil==1.5
+requests==2.28.1
+sqlparse==0.4.2
+tzdata==2022.1
+urllib3==1.26.9
 
 
 ## CREADOR
@@ -28,6 +36,9 @@ Leandro Tomas Aliaga
 
 ## ACLARACIONES IMPORTANTES
 ***
+* SUPERUSUARIO creado para revision de ADMIN = usuario : lea | contraseña : lea  
 
-* El buscador de dichas bases de datos solo busca con una palabra , indiferente de mayuscula/minuscula pero si hace diferencia para acentuaciones
-* SUPERUSUARIO creado para revision de ADMIN = usuario : octavio | contraseña : octavio  
+
+
+
+[![Alt text](https://img.youtube.com/vi/T1qieY00XBA/0.jpg)](https://www.youtube.com/watch?v=T1qieY00XBA)
