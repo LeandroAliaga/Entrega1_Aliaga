@@ -39,6 +39,6 @@ Leandro Tomas Aliaga
 * SUPERUSUARIO creado para revision de ADMIN = usuario : lea | contraseña : lea  
 
 
-
+## VIDEO EXPLICANDO EL PROYECTO 
 
 [![Alt text](https://img.youtube.com/vi/T1qieY00XBA/0.jpg)](https://www.youtube.com/watch?v=T1qieY00XBA)
