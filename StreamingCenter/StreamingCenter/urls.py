@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from clientes import views
 from clientes.views import Inicio, registro, Error404View, Error505View
 from django.contrib.auth.views import LogoutView

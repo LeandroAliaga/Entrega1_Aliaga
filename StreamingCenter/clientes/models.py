@@ -1,7 +1,5 @@
 from django.db import models
-import uuid
-from django.contrib.auth.models import User
-from django.db.models.fields.files import ImageField
+
 
 
 class Cliente(models.Model):

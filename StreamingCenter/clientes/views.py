@@ -231,12 +231,16 @@ def clientes_formulario(request):
 
 @login_required
 def eliminar_cliente(request, id):
-    cliente = Cliente.objects.get(id=id)
-    cliente.delete()
+    if request.method == 'GET':
+        cliente = Cliente.objects.get(id=id)
+        cliente.delete()
+        
+        clientes = Cliente.objects.all()
+        contexto = {'clientes': clientes}
+        return render(request, 'clientes/mostrar_datos_clientes.html', contexto, {'mensaje': 'Cliente eliminado exitosamente'})
+    else :
+        return render(request, 'clientes/inicio.html', {'mensaje': 'No se pudo eliminar el cliente'})
     
-    clientes = Cliente.objects.all()
-    contexto = {'clientes': clientes}
-    return render(request, 'mostrar_datos_clientes.html', contexto)
 
 #---------------------------------------------------------------------------------------------------------------------
 #EDITAR CLIENTES
@@ -407,10 +411,10 @@ def editar_servicio(request, id):
 #ERRORES
 
 class Error404View(TemplateView):
-    template_name = 'clientes/error404.html'
+    template_name = 'error404.html'
     
 class Error505View(TemplateView):
-    template_name = 'clientes/error500.html'
+    template_name = 'error500.html'
     
     @classmethod
     def as_error_view(cls):

@@ -1,9 +1,7 @@
-from tkinter import Label
 from django import forms
 from datetime import date
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.forms import ModelForm
 
 
 
